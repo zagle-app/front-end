@@ -38,7 +38,7 @@ export default {
   methods:{
     generateJson(data) {
       data['token'] = this.$cookies.get('token');
-      this.axios.post("http://localhost:3000/event", data)
+      this.$http.post("http://localhost:3000/event", data);
     }
   },
 }
