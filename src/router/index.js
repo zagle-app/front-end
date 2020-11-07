@@ -2,9 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import VueFormulate from '@braid/vue-formulate'
+import VueCookies from 'vue-cookies'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.use(VueRouter)
 Vue.use(VueFormulate)
+Vue.use(VueCookies)
+Vue.use(axios)
+Vue.use(VueAxios)
+
 
 const routes = [
   {
