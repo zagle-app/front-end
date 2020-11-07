@@ -8,7 +8,7 @@
 <script>
 
 export default {
-  name: 'formatka',
+  name: 'formatka2',
   data () {
     return {
       values: {},
