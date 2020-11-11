@@ -15,19 +15,31 @@ export default {
       schema: [
         {
           "component": "h3",
-          "children": "Dodaj konsultację"
+          "children": "Wybierz konsultację"
         },
         {
-          "label": "Nazwa wydarzenia",
-          "name": "summary",
-          "validation": "required"
-        },
+          "type": "select",
+          "label": "Dostępni konsultanci",
+          "name": "konsultant",
+          "validation": "required",
+          "options": {
+            "1": "Paweł Włodarczyk",
 
+          }
+        },
         {
           "type":"datetime-local",
           "label": "Data",
           "name": "eventStartTime",
           "help": "Wybierz datę",
+          "validation": "required"
+        },
+
+        {
+          "type":"email",
+          "label": "E-mail",
+          "name": "email",
+          "help": "Wpisz swój e-mail",
           "validation": "required"
         },
         {
@@ -46,5 +58,5 @@ export default {
 
 </script>
 <style lang="scss">
-@import './node_modules/@braid/vue-formulate/themes/snow/snow.scss';
+
 </style>

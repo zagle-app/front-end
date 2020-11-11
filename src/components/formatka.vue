@@ -39,7 +39,7 @@ export default {
   methods:{
     generateJson(data) {
       data['token'] = this.$cookies.get('token');
-      this.$http.post("http://localhost:3000/event", data);
+      this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data);
     }
   },
 }

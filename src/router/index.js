@@ -16,12 +16,12 @@ Vue.use(VueAxios, axios)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'Konsultant',
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/klient',
+    name: 'Klient',
     component: () => import('../views/About.vue')
   }
 ]
