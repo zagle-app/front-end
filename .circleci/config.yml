@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:10.16.3
     steps:
       - checkout
       - run:
@@ -21,3 +21,6 @@ jobs:
       - run:
           name: build-project
           command: npm run build
+      - run: # check that the project is linted properly
+          name: lint
+          command: npm run lint
