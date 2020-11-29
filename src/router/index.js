@@ -3,6 +3,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Main from '../views/Main.vue'
 import VueFormulate from '@braid/vue-formulate'
 import VueCookies from 'vue-cookies'
 
@@ -16,6 +17,11 @@ Vue.use(VueAxios, axios)
 const routes = [
   {
     path: '/',
+    name: 'Main',
+    component: Main
+  },
+  {
+    path: '/konsultant',
     name: 'Konsultant',
     component: Home
   },

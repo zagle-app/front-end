@@ -23,7 +23,8 @@ export default {
   },
   methods: {
     onSuccess(googleUser) {
-      let loggedUser = googleUser['wc'];
+      console.log(googleUser);
+      let loggedUser = googleUser['xc'];
       document.cookie = "token=" + loggedUser['access_token'];
       location.reload();
     }
