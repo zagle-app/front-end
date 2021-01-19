@@ -2,15 +2,64 @@
   <FormulateForm
       v-model="values"
       :schema="schema"
-      @submit="generateJson"
-  />
+      @submit="generateJson">
+    <FormulateInput
+        :options="finalArr"
+        type="select"
+        placeholder="Wybierz opcję"
+        label="Wybierz konsultanta"
+        @input="onChange"
+    >
+    </FormulateInput>
+    <FormulateInput type="submit"></FormulateInput>
+    <FormulateInput type="hidden" v-model="event"></FormulateInput>
+  </FormulateForm>
 </template>
 <script>
 
+
+
 export default {
+  beforeCreate() {
+    let arr = []
+    let arr2 = []
+    let final = []
+    let events = []
+    this.$http.get("https://thingproxy.freeboard.io/fetch/https://zagle-app-db.herokuapp.com/consultant/", {
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }
+    }).then(function (response){
+      response["data"]["_embedded"]["consultant"].map(x=>{
+        arr.push((x.name || "Nie").concat(" ").concat(x.lastName || "Obecny"));
+        events.push(x["_links"]["meetings"])
+      })
+      response["data"]["_embedded"]["consultant"].map(x=>{
+        arr2.push(x.mailAdress || "brak@brak.pl");
+      })
+    }).finally(() => {
+      arr.forEach((element, index) => {
+        let element2 = arr2[index];
+        let x = String(index);
+        final.push({
+          id: x,
+          label: element,
+          value: element2
+        })
+      })
+      this.finalArr = final;
+      console.log(final);
+      this.events = events;
+    })
+  },
   name: 'formatka2',
   data () {
     return {
+      finalArr: {},
+      events: [],
+      event: "",
       values: {},
       schema: [
         {
@@ -18,44 +67,26 @@ export default {
           "children": "Wybierz konsultację"
         },
         {
-          "type": "select",
-          "label": "Dostępni konsultanci",
-          "name": "konsultant",
-          "validation": "required",
-          "options": {
-            "1": "Paweł Włodarczyk",
-
-          }
-        },
-        {
           "type":"datetime-local",
           "label": "Data",
           "name": "eventStartTime",
           "help": "Wybierz datę",
           "validation": "required"
-        },
-
-        {
-          "type":"email",
-          "label": "E-mail",
-          "name": "email",
-          "help": "Wpisz swój e-mail",
-          "validation": "required"
-        },
-        {
-          "type": "submit"
         }
       ]
     }
   },
   methods:{
     generateJson(data) {
+      data['form'] = this.values;
       data['token'] = this.$cookies.get('token');
-      this.$http.post("http://localhost:3000/event", data);
+      this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data);
+    },
+    onChange(){
+
     }
   },
 }
-
 </script>
 <style lang="scss">
 

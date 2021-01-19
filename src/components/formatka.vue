@@ -2,7 +2,6 @@
   <FormulateForm
       v-model="values"
       :schema="schema"
-      @submit="generateJson"
   />
 </template>
 <script>
@@ -37,10 +36,6 @@ export default {
     }
   },
   methods:{
-    generateJson(data) {
-      data['token'] = this.$cookies.get('token');
-      this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data);
-    }
   },
 }
 
