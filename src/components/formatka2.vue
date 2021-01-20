@@ -8,11 +8,9 @@
         type="select"
         placeholder="Wybierz opcję"
         label="Wybierz konsultanta"
-        @input="onChange"
     >
     </FormulateInput>
     <FormulateInput type="submit"></FormulateInput>
-    <FormulateInput type="hidden" v-model="event"></FormulateInput>
   </FormulateForm>
 </template>
 <script>
@@ -25,11 +23,11 @@ export default {
     let arr2 = []
     let final = []
     let events = []
-    this.$http.get("https://thingproxy.freeboard.io/fetch/https://zagle-app-db.herokuapp.com/consultant/", {
+    this.$http.get("https://cors-anywhere.herokuapp.com/https://zagle-app-db.herokuapp.com/consultant/", {
         mode: 'cors',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
       }
     }).then(function (response){
       response["data"]["_embedded"]["consultant"].map(x=>{
@@ -50,16 +48,12 @@ export default {
         })
       })
       this.finalArr = final;
-      console.log(final);
-      this.events = events;
     })
   },
   name: 'formatka2',
   data () {
     return {
       finalArr: {},
-      events: [],
-      event: "",
       values: {},
       schema: [
         {
@@ -81,9 +75,6 @@ export default {
       data['form'] = this.values;
       data['token'] = this.$cookies.get('token');
       this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data);
-    },
-    onChange(){
-
     }
   },
 }

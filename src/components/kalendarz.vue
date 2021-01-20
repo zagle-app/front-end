@@ -13,7 +13,35 @@ import plLocale from '@fullcalendar/core/locales/pl';
 
 export default {
   beforeCreate() {
+    let links = []
+    let events = []
+    this.$http.get("https://cors-anywhere.herokuapp.com/https://zagle-app-db.herokuapp.com/consultant/", {
+          mode: 'cors',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+    }).then(function (response) {
+      response["data"]["_embedded"]["consultant"].map(x => {
+        links.push(x["_links"]["meetings"])
+      })
+    }).finally(() => {
+      this.links = links;
+    })
 
+    links.map(x => {
+      this.$http.get("https://cors-anywhere.herokuapp.com/".concat(x["href"]), {
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        }
+      }).then(function (response) {
+        events.push(response["_embedded"]["availability"])
+      })
+
+    })
+    this.events = events
   },
   name: "kalendarz",
   components: {
@@ -21,12 +49,13 @@ export default {
   },
   data() {
     return {
+      links: [],
+      events: [],
       calendarOptions: {
         plugins: [ timeGridPlugin, interactionPlugin,bootstrapPlugin ],
         initialView: 'timeGridWeek',
         locale: plLocale,
-        events: {
-        },
+        events: this.events,
         themeSystem: 'bootstrap'
       }
     }
