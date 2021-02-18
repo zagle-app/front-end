@@ -75,12 +75,25 @@ export default {
     generateJson(data) {
       data['form'] = this.values;
       data['token'] = this.$cookies.get('token');
-      this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data)
-      // this.$http.post("http://localhost:3000/event", data)
+
+    //   fetch("https://zagle-app-srv.herokuapp.com/event", {
+    //   // fetch("http://localhost:3000/event", {
+    //     mode: 'no-cors',
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //   },
+    //   body: data
+    // })
+      // this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
+      this.$http.post("http://localhost:3000/event", data)
       .then((data)=>{
         if(data.data && data.data.error){
           alert(data.data.error)
         }else{
+          console.log('\n\n\n\n');
+          console.log(data);
           alert("Meeting successfully added !!!")
         }
       })
