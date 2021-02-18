@@ -86,7 +86,7 @@ export default {
     //   },
     //   body: data
     // })
-      this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
+      this.$http.post("http://ec2-54-93-53-2.eu-central-1.compute.amazonaws.com:8080/event", data)
       // this.$http.post("http://localhost:3000/event", data)
       .then((data)=>{
         if(data.data && data.data.error){
