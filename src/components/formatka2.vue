@@ -86,8 +86,8 @@ export default {
     //   },
     //   body: data
     // })
-      // this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
-      this.$http.post("http://localhost:3000/event", data)
+      this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
+      // this.$http.post("http://localhost:3000/event", data)
       .then((data)=>{
         if(data.data && data.data.error){
           alert(data.data.error)
