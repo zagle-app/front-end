@@ -23,9 +23,14 @@ export default {
   },
   methods: {
     onSuccess(googleUser) {
-      console.log(googleUser);
-      let loggedUser = googleUser['uc'];
-      document.cookie = "token=" + loggedUser['access_token'];
+      const keysArr = Object.keys(googleUser);
+      for(let i=0;i<keysArr.length;i++){
+        let propablyAcessToken = googleUser[keysArr[i]].access_token;
+        if(propablyAcessToken){
+          document.cookie = "token=" + googleUser[keysArr[i]].access_token;
+        }
+      }
+      
       location.reload();
     }
   }

@@ -23,13 +23,14 @@ export default {
     let arr2 = []
     let final = []
     let events = []
-    this.$http.get("https://cors-anywhere.herokuapp.com/https://zagle-app-db.herokuapp.com/consultant/", {
+    this.$http.get("https://zagle-app-db.herokuapp.com/consultant/", {
         mode: 'cors',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
       }
-    }).then(function (response){
+    })
+    .then(function (response){
       response["data"]["_embedded"]["consultant"].map(x=>{
         arr.push((x.name || "Nie").concat(" ").concat(x.lastName || "Obecny"));
         events.push(x["_links"]["meetings"])
@@ -74,8 +75,8 @@ export default {
     generateJson(data) {
       data['form'] = this.values;
       data['token'] = this.$cookies.get('token');
-      // this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data);
-      this.$http.post("http://localhost:3000/event", data)
+      this.$http.post("https://zagle-app-calendar-server.herokuapp.com/event", data)
+      // this.$http.post("http://localhost:3000/event", data)
       .then((data)=>{
         if(data.data && data.data.error){
           alert(data.data.error)

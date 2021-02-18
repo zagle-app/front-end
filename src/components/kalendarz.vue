@@ -15,7 +15,7 @@ export default {
   beforeCreate() {
     let links = []
     let events = []
-    this.$http.get("https://cors-anywhere.herokuapp.com/https://zagle-app-db.herokuapp.com/consultant/", {
+    this.$http.get("https://zagle-app-db.herokuapp.com/consultant/", {
           mode: 'cors',
           headers: {
             'Accept': 'application/json',
@@ -30,7 +30,7 @@ export default {
     })
 
     links.map(x => {
-      this.$http.get("https://cors-anywhere.herokuapp.com/".concat(x["href"]), {
+      this.$http.get(x["href"], {
         mode: 'cors',
         headers: {
           'Accept': 'application/json',
