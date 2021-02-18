@@ -24,7 +24,7 @@ export default {
   methods: {
     onSuccess(googleUser) {
       console.log(googleUser);
-      let loggedUser = googleUser['Bc'];
+      let loggedUser = googleUser['uc'];
       document.cookie = "token=" + loggedUser['access_token'];
       location.reload();
     }
