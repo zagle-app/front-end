@@ -2,6 +2,7 @@
   <FormulateForm
       v-model="values"
       :schema="schema"
+      @submit="addConsult"
   />
 </template>
 <script>
@@ -36,6 +37,10 @@ export default {
     }
   },
   methods:{
+    addConsult(data){
+      data["dane"] = this.values;
+      this.$http.post();
+    }
   },
 }
 

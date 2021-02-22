@@ -5,6 +5,9 @@
         <v-col align="center"><img alt="Vue logo" src="../assets/logo.png"></v-col>
       </v-row>
       <v-row>
+        <v-col align="center"><loginKeycloak></loginKeycloak></v-col>
+      </v-row>
+      <v-row>
         <v-col align="center"><formatka></formatka></v-col>
       </v-row>
     </v-container>
@@ -19,10 +22,12 @@
 <script>
 
 import formatka from '@/components/formatka.vue'
+import LoginKeycloak from "../components/loginKeycloak";
 
 export default {
   name: 'Home',
   components: {
+    LoginKeycloak,
     formatka
   }
 }
