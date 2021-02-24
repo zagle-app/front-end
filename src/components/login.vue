@@ -24,15 +24,36 @@ export default {
   methods: {
     onSuccess(googleUser) {
       const keysArr = Object.keys(googleUser);
-      for(let i=0;i<keysArr.length;i++){
+      for (let i = 0; i < keysArr.length; i++) {
         let propablyAcessToken = googleUser[keysArr[i]].access_token;
-        if(propablyAcessToken){
+        if (propablyAcessToken) {
           document.cookie = "token=" + googleUser[keysArr[i]].access_token;
         }
-      }
-      
+        const keysToMail = Object.keys(googleUser[keysArr[i]]);
+        if(keysToMail){
+
+          let myProp=googleUser[keysArr[i]];
+          keysToMail.map(x=>{
+
+            if( myProp[x]){
+            const re = new RegExp(/\S+@\S+.\S+/);
+            if(re.test(myProp[x])){
+              document.cookie = "mail=" + myProp[x];
+            }
+          }
+          })
+
+
+        }
+        }
+      /*let obj = googleUser[keysArr[2]];
+      console.log(obj)
+      const keysArr2 = Object.keys(obj);
+      console.log(keysArr2[5]);
+      console.log(googleUser[keysArr[2]][keysArr2[5]])
+      */
       location.reload();
+      }
     }
   }
-}
-  </script>
+</script>

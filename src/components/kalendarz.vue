@@ -10,6 +10,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import plLocale from '@fullcalendar/core/locales/pl';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 export default {
   beforeCreate() {
@@ -52,10 +53,13 @@ export default {
       links: [],
       events: [],
       calendarOptions: {
-        plugins: [ timeGridPlugin, interactionPlugin,bootstrapPlugin ],
+        plugins: [ timeGridPlugin, interactionPlugin,bootstrapPlugin,googleCalendarPlugin ],
         initialView: 'timeGridWeek',
         locale: plLocale,
-        events: this.events,
+        googleCalendarApiKey: 'AIzaSyB7IAXQSfJXAAwMenXf0uoLCIhCgmVveXY',
+        events: {
+          googleCalendarId: this.$cookies.get("mail")
+        },
         themeSystem: 'bootstrap'
       }
     }
