@@ -76,6 +76,7 @@ export default {
       data['form'] = this.values;
       data['token'] = this.$cookies.get('token');
 
+// THIS ENDPOIT IS TO HEROKU DEPLOY
     //   fetch("https://zagle-app-srv.herokuapp.com/event", {
     //   // fetch("http://localhost:3000/event", {
     //     mode: 'no-cors',
@@ -86,9 +87,13 @@ export default {
     //   },
     //   body: data
     // })
-      this.$http.post("http://ec2-54-93-53-2.eu-central-1.compute.amazonaws.com:8081/event", data)
+    // https://zagle-app-calendar-server.herokuapp.com
+      this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
+      // this.$http.post("https://cors-anywhere.herokuapp.com/http://ec2-54-93-53-2.eu-central-1.compute.amazonaws.com:8081/event", data)
       // this.$http.post("http://localhost:3000/event", data)
       .then((data)=>{
+        // console.log('\n\n\n\n');
+        // console.log(data);
         if(data.data && data.data.error){
           alert(data.data.error)
         }else{
