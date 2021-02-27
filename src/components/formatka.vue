@@ -19,15 +19,22 @@ export default {
         },
         {
           "label": "Nazwa wydarzenia",
-          "name": "summary",
+          "name": "title",
           "validation": "required"
         },
 
         {
           "type":"datetime-local",
-          "label": "Data",
+          "label": "Data Start",
           "name": "eventStartTime",
-          "help": "Wybierz datę",
+          "help": "Wybierz datę rozpoczecia",
+          "validation": "required"
+        },
+        {
+          "type":"datetime-local",
+          "label": "Data Koniec",
+          "name": "eventEndTime",
+          "help": "Wybierz datę zakonczenia",
           "validation": "required"
         },
         {
@@ -37,9 +44,37 @@ export default {
     }
   },
   methods:{
-    addConsult(data){
-      data["dane"] = this.values;
-      this.$http.post();
+    async addConsult(data){
+      let consultantId = await this.getIDByMail(this.$cookies.get("mail"))
+
+      const event = {
+        title: data.title,
+        start: data.eventStartTime,
+        end: data.eventEndTime,
+        available: true,
+        description: '',
+        consultantIde: Number(consultantId),
+      }
+
+      await this.saveToDB(event);
+    },
+    async getIDByMail(conultantMail) {
+      let consultants = await this.$http.get("https://zagle-app-db.herokuapp.com/consultant")
+
+      consultants = consultants.data._embedded.consultant || [];
+      const consultant =
+          consultants.filter((c) => c.mailAdress === conultantMail).pop() ||
+          false;
+
+      if (consultant) {
+        return consultant._links.self.href
+            .split("https://zagle-app-db.herokuapp.com/consultant/")
+            .pop() || false;
+      }
+    },
+    async saveToDB(event) {
+      await this.$http.post("https://zagle-app-db.herokuapp.com/availability", event);
+      return alert("Dodano poprawnie meeting :)")
     }
   },
 }

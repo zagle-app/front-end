@@ -5,6 +5,7 @@
           <formatka2></formatka2>
         </v-col>
         <v-col sm="12" lg="6" align="center">
+          <h1 class="title mb-5">Twoje wydarzenia</h1>
           <kalendarz></kalendarz>
         </v-col>
       </v-row>
