@@ -46,12 +46,20 @@ export default {
 
         }
         }
-      /*let obj = googleUser[keysArr[2]];
-      console.log(obj)
+
+      let obj = googleUser[keysArr[2]];
       const keysArr2 = Object.keys(obj);
-      console.log(keysArr2[5]);
-      console.log(googleUser[keysArr[2]][keysArr2[5]])
-      */
+      let name = googleUser[keysArr[2]][keysArr2[2]]
+      let surname = googleUser[keysArr[2]][keysArr2[3]]
+      let mail = googleUser[keysArr[2]][keysArr2[5]]
+
+     let data = {
+        "name": name,
+        "lastName": surname,
+        "mailAdress": mail,
+        "bio": " "
+      }
+      this.$http.post("https://zagle-app-db.herokuapp.com/consultant/", data);
       location.reload();
       }
     }

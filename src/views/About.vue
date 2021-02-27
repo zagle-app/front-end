@@ -1,9 +1,5 @@
 <template>
   <div class="about">
-    <v-row>
-      <v-col style="margin: auto;" align="center" ><login></login></v-col>
-    </v-row>
-
       <v-row style="padding-top: 2em;" v-if="this.$cookies.get('token') !== null">
         <v-col sm="12" lg="6" align="center" style="margin-top: 5%">
           <formatka2></formatka2>
@@ -13,7 +9,7 @@
         </v-col>
       </v-row>
     <v-row v-else>
-      <v-col align="center" v-><h4>Zaloguj się jako klient aby dodać swoje wydarzenie!</h4></v-col>
+      <v-col align="center" v-><h4>Zaloguj się aby dodać swoje wydarzenie!</h4></v-col>
     </v-row>
     <v-row v-if="this.$vuetify.breakpoint.width > 1000">
     <div class="custom-shape-divider-bottom-1605113956">
@@ -28,14 +24,12 @@
 <script>
 import kalendarz from "@/components/kalendarz";
 import formatka2 from "@/components/formatka2";
-import login from '@/components/login.vue';
 
 export default {
   name:"About",
   components: {
     kalendarz,
     formatka2,
-    login
   },
 }
 </script>

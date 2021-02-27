@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Strona Główna</router-link>
-      <router-link to="/konsultant">Konsultant</router-link> |
-      <router-link to="/klient">Klient</router-link>
+      <router-link to="/">Logowanie</router-link>
+      <router-link to="/konsultant">Dodaj Konsultacje</router-link> |
+      <router-link to="/klient">Zarezerwuj konsultacje</router-link>
     </div>
 
   </div>
@@ -34,19 +34,19 @@
               <v-list-item-icon>
                 <v-icon>mdi-apple-safari</v-icon>
               </v-list-item-icon>
-              <v-list-item-title><router-link to="/">Strona Główna</router-link></v-list-item-title>
+              <v-list-item-title><router-link to="/">Logowanie</router-link></v-list-item-title>
             </v-list-item>
             <v-list-item link>
               <v-list-item-icon>
                 <v-icon>mdi-folder</v-icon>
               </v-list-item-icon>
-              <v-list-item-title><router-link to="/konsultant">Konsultant</router-link></v-list-item-title>
+              <v-list-item-title><router-link to="/konsultant">Dodaj Konsultacje</router-link></v-list-item-title>
             </v-list-item>
             <v-list-item link>
               <v-list-item-icon>
                 <v-icon>mdi-account-multiple</v-icon>
               </v-list-item-icon>
-              <v-list-item-title><router-link to="/klient">Klient</router-link></v-list-item-title>
+              <v-list-item-title><router-link to="/klient">Zarezerwuj konsultacje</router-link></v-list-item-title>
             </v-list-item>
           </v-list>
 
