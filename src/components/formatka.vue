@@ -1,16 +1,37 @@
 <template>
-  <FormulateForm
-      v-model="values"
-      :schema="schema"
-      @submit="addConsult"
-  />
+  <div class="container">
+    <FormulateForm
+        v-model="values"
+        :schema="schema"
+        @submit="addConsult"
+    />
+    <v-snackbar
+        v-model="snackbar"
+    >
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+            color="red"
+            text
+            v-bind="attrs"
+            @click="snackbar = false"
+        >
+          Zamknij
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 <script>
+
 
 export default {
   name: 'formatka',
   data () {
     return {
+      snackbar: false,
+      text: String,
       values: {},
       schema: [
         {
@@ -46,7 +67,6 @@ export default {
   methods:{
     async addConsult(data){
       let consultantId = await this.getIDByMail(this.$cookies.get("mail"))
-
       const event = {
         title: data.title,
         start: data.eventStartTime,
@@ -57,6 +77,8 @@ export default {
       }
 
       await this.saveToDB(event);
+      this.text = 'Dodano konsultacje';
+      this.snackbar = true
     },
     async getIDByMail(conultantMail) {
       let consultants = await this.$http.get("https://zagle-app-db.herokuapp.com/consultant")
@@ -74,7 +96,6 @@ export default {
     },
     async saveToDB(event) {
       await this.$http.post("https://zagle-app-db.herokuapp.com/availability", event);
-      return alert("Dodano poprawnie meeting :)")
     }
   },
 }

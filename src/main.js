@@ -6,7 +6,6 @@ import VueCookies from 'vue-cookies'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import router from './router'
-import Keycloak from "keycloak-js";
 
 
 Vue.config.productionTip = false
@@ -18,6 +17,5 @@ new Vue({
   VueCookies,
   axios,
   VueAxios,
-  Keycloak,
   render: h => h(App)
 }).$mount('#app')
