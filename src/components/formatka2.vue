@@ -123,10 +123,15 @@ export default {
       let consultantId = arrSliced[4]
       let answer = await this.$http.get('https://zagle-app-db.herokuapp.com/availability/search/searchByConsultantIde?consultantIde='+consultantId)
       answer.data._embedded.meetings.map(function (item) {
+        console.log(item);
         if (item.available === true){
           let slicedDate = item.start.split("T")
+          let link = '';
+          if(item._links && item._links.self && item._links.self.href){
+            link=item._links.self.href;
+          }
           arr.push({
-            value: item.start,
+            value: {start:item.start,link:link},
             label: item.title + " " + slicedDate[0] + " " + slicedDate[1]
           })
         }
