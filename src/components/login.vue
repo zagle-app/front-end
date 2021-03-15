@@ -59,7 +59,7 @@ export default {
         "mailAdress": mail,
         "bio": " "
       }
-      this.$http.post("https://zagle-app-db.herokuapp.com/consultant/", data);
+      await this.$http.post("https://zagle-app-db.herokuapp.com/consultant/", data);
       location.reload();
       }
     }
