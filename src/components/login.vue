@@ -22,7 +22,7 @@ export default {
     GoogleLogin
   },
   methods: {
-    onSuccess(googleUser) {
+    async onSuccess(googleUser) {
       const keysArr = Object.keys(googleUser);
       for (let i = 0; i < keysArr.length; i++) {
         let propablyAcessToken = googleUser[keysArr[i]].access_token;
