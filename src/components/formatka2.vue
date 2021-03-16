@@ -99,8 +99,10 @@ export default {
       data['token'] = this.$cookies.get('token');
       console.log(data)
       this.$http.post("https://zagle-app-srv.herokuapp.com/event", data)
+      // this.$http.post("http://localhost:8081/event", data)
           .then((data)=>{
             if(data.data && data.data.error){
+              console.log(data.data.error);
               this.text = 'Wystąpił błąd';
               this.snackbar = true
             }else{
@@ -125,14 +127,16 @@ export default {
       answer.data._embedded.meetings.map(function (item) {
         console.log(item);
         if (item.available === true){
-          let slicedDate = item.start.split("T")
+          let slicedDate = item.start
+           let slicedDateEnd = item.end
           let link = '';
+          let title = item.title || '';
           if(item._links && item._links.self && item._links.self.href){
             link=item._links.self.href;
           }
           arr.push({
-            value: {start:item.start,link:link},
-            label: item.title + " " + slicedDate[0] + " " + slicedDate[1]
+            value: {start:item.start,link:link,title:title,end:slicedDateEnd},
+            label: item.title + " " + slicedDate.split("T")[0] + " " + slicedDate.split("T")[1]            
           })
         }
       })
